@@ -24,32 +24,39 @@ float ratioOuterToHour = goldenRatio;
 float ratioHourToMinute = goldenRatio;
 float ratioMinuteToSecond = goldenRatio;
 
+// Size of the hour circle, and its offset from the outer circle's midpoint
 float hourD = outerD * ratioOuterToHour;
 float hourOffset = 0.5 * (outerD - hourD);
 
+// Size of the minute circle and its offset from the hour circle's midpoint
 float minuteD = hourD * ratioHourToMinute;
 float minuteOffset = 0.5 * (hourD - minuteD);
 
+// Size of the second circle and its offset from the minute circle's midpoint
 float secondD = minuteD * ratioMinuteToSecond;
 float secondOffset = 0.5 * (minuteD - secondD);
 
-void setup() {
-  size(outerD, outerD);
-}
-
-
-void outerCircle() {
-  arc(outerR, outerR, outerD, outerD, 0, 2*PI);
-}
-
+// Convert a "minutes" or "seconds" angle into radians.
 float secondsOrMinutesToRadians(units) {
   return 2 * PI / 60 * units;
 }
 
+// Convert an "hours" angle into radians.
 float hoursToRadians(hours) {
   return 2 * PI / 12 * hours;
 }
 
+// Establish the size of the canvas element.
+void setup() {
+  size(outerD, outerD);
+}
+
+// Draw the outer circle.
+void outerCircle() {
+  arc(outerR, outerR, outerD, outerD, 0, 2*PI);
+}
+
+// Draw the hour circle.
 void hourCircle() {
   float rads = hoursToRadians(theHours);
 
@@ -58,6 +65,7 @@ void hourCircle() {
   arc(hourX, hourY, hourD, hourD, 0, 2*PI);
 }
 
+// Draw the minute circle.
 void minuteCircle() {
   float rads = secondsOrMinutesToRadians(theMinutes);
   minuteX = hourX + minuteOffset * sin(rads);
@@ -65,6 +73,7 @@ void minuteCircle() {
   arc(minuteX, minuteY, minuteD, minuteD, 0, 2*PI);
 }
 
+// Draw the second circle.
 void secondCircle() {
   float rads = secondsOrMinutesToRadians(theSeconds);
   secondX = minuteX + secondOffset * sin(rads);
@@ -72,7 +81,9 @@ void secondCircle() {
   arc(secondX, secondY, secondD, secondD, 0, 2*PI);
 }
 
+// Draw the clock.
 void draw() {
+  // We add milliseconds onto the seconds so the circle will glide smoothly.
   int ms = new Date().getMilliseconds();
   theSeconds = second() + ms / 1000;
   theMinutes = minute() + theSeconds / 60;
