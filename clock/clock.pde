@@ -15,7 +15,7 @@ float theMinutes;
 float theHours;
 
 // Diameter and radius of the outer circle.
-int outerD = 400;
+int outerD = 740;
 float outerR = outerD / 2;
 
 // Ratios to define the circles' sizes in terms of the outer circle's size.
