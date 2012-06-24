@@ -1,3 +1,4 @@
+int STROKE_WEIGHT = 3;
 // X and Y coordinates for the midpoints of our circles.
 float hourX;
 float hourY;
@@ -20,7 +21,7 @@ float secondRads;
 float minuteRads;
 
 // Diameter and radius of the outer circle.
-int outerD = 740;
+int outerD = 730;
 float outerR = outerD / 2;
 
 // Ratios to define the circles' sizes in terms of the outer circle's size.
@@ -53,7 +54,8 @@ float hoursToRadians(hours) {
 
 // Establish the size of the canvas element.
 void setup() {
-  size(outerD, outerD);
+  strokeWeight(STROKE_WEIGHT);
+  size(outerD + STROKE_WEIGHT, outerD + STROKE_WEIGHT);
 }
 
 // Draw the outer circle.
