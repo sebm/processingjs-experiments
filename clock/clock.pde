@@ -14,6 +14,11 @@ float theSeconds;
 float theMinutes;
 float theHours;
 
+// The angles where the circles should be placed,
+// relative to the circles that contain them.
+float secondRads;
+float minuteRads;
+
 // Diameter and radius of the outer circle.
 int outerD = 740;
 float outerR = outerD / 2;
@@ -67,18 +72,36 @@ void hourCircle() {
 
 // Draw the minute circle.
 void minuteCircle() {
-  float rads = secondsOrMinutesToRadians(theMinutes);
-  minuteX = hourX + minuteOffset * sin(rads);
-  minuteY = hourY - minuteOffset * cos(rads);
+  minuteX = hourX + minuteOffset * sin(minuteRads);
+  minuteY = hourY - minuteOffset * cos(minuteRads);
   arc(minuteX, minuteY, minuteD, minuteD, 0, TWO_PI);
 }
 
 // Draw the second circle.
 void secondCircle() {
-  float rads = secondsOrMinutesToRadians(theSeconds);
-  secondX = minuteX + secondOffset * sin(rads);
-  secondY = minuteY - secondOffset * cos(rads);
+  secondX = minuteX + secondOffset * sin(secondRads);
+  secondY = minuteY - secondOffset * cos(secondRads);
   arc(secondX, secondY, secondD, secondD, 0, TWO_PI);
+}
+
+// Draw a tick in the minutes circle
+void minuteTick() {
+  line(
+    minuteX + 0.45 * minuteD * sin(minuteRads),
+    minuteY - 0.45 * minuteD * cos(minuteRads),
+    minuteX + 0.50 * minuteD * sin(minuteRads),
+    minuteY - 0.50 * minuteD * cos(minuteRads)
+  );
+}
+
+// Draw a tick in the seconds circle
+void secondTick() {
+  line(
+    secondX + 0.4 * secondD * sin(secondRads),
+    secondY - 0.4 * secondD * cos(secondRads),
+    secondX + 0.5 * secondD * sin(secondRads),
+    secondY - 0.5 * secondD * cos(secondRads)
+  );
 }
 
 // Draw the clock.
@@ -88,10 +111,18 @@ void draw() {
   theSeconds = second() + ms / 1000;
   theMinutes = minute() + theSeconds / 60;
   theHours = hour() + theMinutes / 60;
+
+  secondRads = secondsOrMinutesToRadians(theSeconds);
+  minuteRads = secondsOrMinutesToRadians(theMinutes);
+
   outerCircle();
   hourCircle();
+
   minuteCircle();
+  minuteTick();
+
   secondCircle();
+  secondTick();
 }
 
 loop();
