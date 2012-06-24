@@ -51,29 +51,26 @@ float hoursToRadians(hours) {
 }
 
 void hourCircle() {
-  float theRadians = hoursToRadians(theHours);
+  float rads = hoursToRadians(theHours);
 
-  // hourX and hourY are the coords of the hour circle.
-  // the hour circle rotates around x=outerR, y=outerR
-  hourX = outerR + hourOffset * sin(theRadians);
-  hourY = outerR - hourOffset * cos(theRadians);
+  hourX = outerR + hourOffset * sin(rads);
+  hourY = outerR - hourOffset * cos(rads);
   arc(hourX, hourY, hourD, hourD, 0, 2*PI);
 }
 
 void minuteCircle() {
-  float theRadians = secondsOrMinutesToRadians(theMinutes);
-  minuteX = hourX + minuteOffset * sin(theRadians);
-  minuteY = hourY - minuteOffset * cos(theRadians);
+  float rads = secondsOrMinutesToRadians(theMinutes);
+  minuteX = hourX + minuteOffset * sin(rads);
+  minuteY = hourY - minuteOffset * cos(rads);
   arc(minuteX, minuteY, minuteD, minuteD, 0, 2*PI);
 }
 
 void secondCircle() {
-  float theRadians = secondsOrMinutesToRadians(theSeconds);
-  secondX = minuteX + secondOffset * sin(theRadians);
-  secondY = minuteY - secondOffset * cos(theRadians);
+  float rads = secondsOrMinutesToRadians(theSeconds);
+  secondX = minuteX + secondOffset * sin(rads);
+  secondY = minuteY - secondOffset * cos(rads);
   arc(secondX, secondY, secondD, secondD, 0, 2*PI);
 }
-
 
 void draw() {
   int ms = new Date().getMilliseconds();
