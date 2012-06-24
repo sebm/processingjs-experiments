@@ -38,12 +38,12 @@ float secondOffset = 0.5 * (minuteD - secondD);
 
 // Convert a "minutes" or "seconds" angle into radians.
 float secondsOrMinutesToRadians(units) {
-  return 2 * PI / 60 * units;
+  return TWO_PI / 60 * units;
 }
 
 // Convert an "hours" angle into radians.
 float hoursToRadians(hours) {
-  return 2 * PI / 12 * hours;
+  return TWO_PI / 12 * hours;
 }
 
 // Establish the size of the canvas element.
@@ -53,7 +53,7 @@ void setup() {
 
 // Draw the outer circle.
 void outerCircle() {
-  arc(outerR, outerR, outerD, outerD, 0, 2*PI);
+  arc(outerR, outerR, outerD, outerD, 0, TWO_PI);
 }
 
 // Draw the hour circle.
@@ -62,7 +62,7 @@ void hourCircle() {
 
   hourX = outerR + hourOffset * sin(rads);
   hourY = outerR - hourOffset * cos(rads);
-  arc(hourX, hourY, hourD, hourD, 0, 2*PI);
+  arc(hourX, hourY, hourD, hourD, 0, TWO_PI);
 }
 
 // Draw the minute circle.
@@ -70,7 +70,7 @@ void minuteCircle() {
   float rads = secondsOrMinutesToRadians(theMinutes);
   minuteX = hourX + minuteOffset * sin(rads);
   minuteY = hourY - minuteOffset * cos(rads);
-  arc(minuteX, minuteY, minuteD, minuteD, 0, 2*PI);
+  arc(minuteX, minuteY, minuteD, minuteD, 0, TWO_PI);
 }
 
 // Draw the second circle.
@@ -78,7 +78,7 @@ void secondCircle() {
   float rads = secondsOrMinutesToRadians(theSeconds);
   secondX = minuteX + secondOffset * sin(rads);
   secondY = minuteY - secondOffset * cos(rads);
-  arc(secondX, secondY, secondD, secondD, 0, 2*PI);
+  arc(secondX, secondY, secondD, secondD, 0, TWO_PI);
 }
 
 // Draw the clock.
