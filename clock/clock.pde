@@ -1,4 +1,5 @@
 int STROKE_WEIGHT = 3;
+
 // X and Y coordinates for the midpoints of our circles.
 float hourX;
 float hourY;
@@ -19,6 +20,7 @@ float theHours;
 // relative to the circles that contain them.
 float secondRads;
 float minuteRads;
+float hourRads;
 
 // Diameter and radius of the outer circle.
 int outerD = 730;
@@ -65,10 +67,8 @@ void outerCircle() {
 
 // Draw the hour circle.
 void hourCircle() {
-  float rads = hoursToRadians(theHours);
-
-  hourX = outerR + hourOffset * sin(rads);
-  hourY = outerR - hourOffset * cos(rads);
+  hourX = outerR + hourOffset * sin(hourRads);
+  hourY = outerR - hourOffset * cos(hourRads);
   arc(hourX, hourY, hourD, hourD, 0, TWO_PI);
 }
 
@@ -116,6 +116,7 @@ void draw() {
 
   secondRads = secondsOrMinutesToRadians(theSeconds);
   minuteRads = secondsOrMinutesToRadians(theMinutes);
+  hourRads = hoursToRadians(theHours);
 
   outerCircle();
   hourCircle();
