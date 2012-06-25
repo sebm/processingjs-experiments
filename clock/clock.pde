@@ -86,6 +86,16 @@ void secondCircle() {
   arc(secondX, secondY, secondD, secondD, 0, TWO_PI);
 }
 
+// Draw a tick in the hours circle.
+void hourTick() {
+  line(
+    hourX + 0.45 * hourD * sin(hourRads),
+    hourY - 0.45 * hourD * cos(hourRads),
+    hourX + 0.50 * hourD * sin(hourRads),
+    hourY - 0.50 * hourD * cos(hourRads)
+  );
+}
+
 // Draw a tick in the minutes circle
 void minuteTick() {
   line(
@@ -106,6 +116,16 @@ void secondTick() {
   );
 }
 
+// Draw ticks on the outer circle
+void outerTicks() {
+  for (int i=1; i <= 12; i++) {
+    float theX = outerR + outerR * sin(hoursToRadians(i));
+    float theY = outerR - outerR * cos(hoursToRadians(i));
+    point(theX, theY);
+  }
+}
+
+
 // Draw the clock.
 void draw() {
   // We add milliseconds onto the seconds so the circle will glide smoothly.
@@ -119,7 +139,12 @@ void draw() {
   hourRads = hoursToRadians(theHours);
 
   outerCircle();
+  stroke(#ffffff);
+  outerTicks();
+  stroke(#000000);
+
   hourCircle();
+  hourTick();
 
   minuteCircle();
   minuteTick();
