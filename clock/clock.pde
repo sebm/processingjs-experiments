@@ -1,4 +1,4 @@
-int STROKE_WEIGHT = 3;
+int STROKE_WEIGHT = 2;
 
 // X and Y coordinates for the midpoints of our circles.
 float hourX;
@@ -116,8 +116,32 @@ void secondTick() {
   );
 }
 
-// Draw ticks on the outer circle
-void outerTicks() {
+// Draw a dot in the hours circle.
+void hourDot() {
+  point(
+    hourX + 0.50 * hourD * sin(hourRads),
+    hourY - 0.50 * hourD * cos(hourRads)
+  );
+}
+
+// Draw a dot in the minutes circle
+void minuteDot() {
+  point(
+    minuteX + 0.50 * minuteD * sin(minuteRads),
+    minuteY - 0.50 * minuteD * cos(minuteRads)
+  );
+}
+
+// Draw a dot in the seconds circle
+void secondDot() {
+  point(
+    secondX + 0.5 * secondD * sin(secondRads),
+    secondY - 0.5 * secondD * cos(secondRads)
+  );
+}
+
+// Draw dots on the outer circle
+void outerDots() {
   for (int i=1; i <= 12; i++) {
     float theX = outerR * (1 + sin(hoursToRadians(i)));
     float theY = outerR * (1 - cos(hoursToRadians(i)));
@@ -128,6 +152,7 @@ void outerTicks() {
 
 // Draw the clock.
 void draw() {
+  background(#ffffff);
   // We add milliseconds onto the seconds so the circle will glide smoothly.
   int ms = new Date().getMilliseconds();
   theSeconds = second() + ms / 1000;
@@ -138,19 +163,33 @@ void draw() {
   minuteRads = secondsOrMinutesToRadians(theMinutes);
   hourRads = hoursToRadians(theHours);
 
-  outerCircle();
-  stroke(#ffffff);
-  outerTicks();
   stroke(#000000);
+  fill(#9bd3ae);
+  outerCircle();
 
+  fill(#f386a7);
   hourCircle();
-  hourTick();
+  strokeWeight(STROKE_WEIGHT + 4);
+  hourDot();
+  strokeWeight(STROKE_WEIGHT);
 
+  fill(#ffcc4e);
   minuteCircle();
-  minuteTick();
+  strokeWeight(STROKE_WEIGHT + 4);
+  minuteDot();
+  strokeWeight(STROKE_WEIGHT);
 
+  fill(#c59d7b);
   secondCircle();
-  secondTick();
+
+  strokeWeight(STROKE_WEIGHT + 4);
+  secondDot();
+  strokeWeight(STROKE_WEIGHT);
+
+  strokeWeight(STROKE_WEIGHT + 4);
+  outerDots();
+  strokeWeight(STROKE_WEIGHT);
+
 }
 
 loop();
