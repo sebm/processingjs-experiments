@@ -109,8 +109,8 @@ void minuteTick() {
 // Draw a tick in the seconds circle
 void secondTick() {
   line(
-    secondX + 0.4 * secondD * sin(secondRads),
-    secondY - 0.4 * secondD * cos(secondRads),
+    secondX + 0.47 * secondD * sin(secondRads),
+    secondY - 0.47 * secondD * cos(secondRads),
     secondX + 0.5 * secondD * sin(secondRads),
     secondY - 0.5 * secondD * cos(secondRads)
   );
@@ -182,8 +182,8 @@ void draw() {
   fill(#c59d7b);
   secondCircle();
 
-  strokeWeight(STROKE_WEIGHT + 4);
-  secondDot();
+  strokeWeight(1);
+  secondTick();
   strokeWeight(STROKE_WEIGHT);
 
   strokeWeight(STROKE_WEIGHT + 4);
