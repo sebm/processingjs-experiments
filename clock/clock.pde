@@ -119,8 +119,8 @@ void secondTick() {
 // Draw ticks on the outer circle
 void outerTicks() {
   for (int i=1; i <= 12; i++) {
-    float theX = outerR + outerR * sin(hoursToRadians(i));
-    float theY = outerR - outerR * cos(hoursToRadians(i));
+    float theX = outerR * (1 + sin(hoursToRadians(i)));
+    float theY = outerR * (1 - cos(hoursToRadians(i)));
     point(theX, theY);
   }
 }
