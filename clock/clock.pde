@@ -23,7 +23,7 @@ float minuteRads;
 float hourRads;
 
 // Diameter and radius of the outer circle.
-int outerD = 730;
+int outerD = min(window.innerHeight, window.innerWidth);
 float outerR = outerD / 2;
 
 // Ratios to define the circles' sizes in terms of the outer circle's size.
