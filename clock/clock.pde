@@ -191,5 +191,3 @@ void draw() {
   strokeWeight(STROKE_WEIGHT);
 
 }
-
-loop();
